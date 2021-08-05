@@ -115,7 +115,7 @@ class readspc:
                 elif bitt == 0:   # it's lowtime
                     lowtime, channel, gap = self._lowtimeread(data)
                     if gap != 0:
-                        warning.warn('There is a gap at %0.0f th record, data before this entry is lost.'%(i))
+                        warnings.warn('There is a gap at %0.0f th record, data before this entry is lost.'%(i))
                         
                     timestamp = int.from_bytes(lowtime + hightime, 'little',signed=False)
                     
@@ -184,9 +184,9 @@ class readspc:
                     timestamp = int.from_bytes(lowtime + hightime, 'little',signed=False) * self.step
                     
                     if gap != 0:      # there is a gap
-                        warning.warn('There is a gap at %0.0f th record, data before this entry is lost.'%(i))
-                        gaplist.append(timestamp, channel)
-                    
+                        warnings.warn('There is a gap at %0.0f th record, data before this entry is lost.'%(i))
+                        gaplist.append(timestamp)
+                        gaplist.append(channel)
                     stamplist.append(timestamp)
                     channellist.append(channel)
 
